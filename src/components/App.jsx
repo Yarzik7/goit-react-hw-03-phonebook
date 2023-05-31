@@ -3,6 +3,7 @@ import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import { nanoid } from 'nanoid';
+import { showNotifyReport } from 'js/notifyFunc';
 import css from './App.module.css';
 
 class App extends Component {
@@ -26,20 +27,15 @@ class App extends Component {
     }
   }
 
-  filterInputId = nanoid();
-
-  handleChange = ({ target: { name, value } }) =>
-    this.setState({ [name]: value });
+  handleChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
   handleSubmit = contactFormStates => {
     const { name, number } = contactFormStates;
     const newContact = { id: nanoid(), name, number };
 
-    this.state.contacts.some(({ name: contactName }) => contactName === name)
-      ? alert(`${name} is already in contact`)
-      : this.setState(({ contacts }) => ({
-          contacts: [...contacts, newContact],
-        }));
+    this.state.contacts.some(({ name: contactName }) => contactName.toLowerCase() === name.toLowerCase())
+      ? showNotifyReport(`${name} is already in contact`, 'reportWarning')
+      : this.setState(({ contacts }) => ({contacts: [...contacts, newContact]}));
   };
 
   handleDeleteContact = contactId =>
@@ -56,14 +52,11 @@ class App extends Component {
 
         <ContactForm
           handleSubmit={this.handleSubmit}
-          nameInputId={this.nameInputId}
-          numberInputId={this.numberInputId}
         />
 
         <h2 className={css.title}>Contacts:</h2>
 
         <Filter
-          filterInputId={this.filterInputId}
           handleChange={this.handleChange}
           filter={filter}
         />

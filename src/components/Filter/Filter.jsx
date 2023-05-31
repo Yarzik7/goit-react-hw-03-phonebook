@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import css from './Filter.module.css'
 
-const Filter = ({ filterInputId, handleChange, filter }) => {
+const Filter = ({handleChange, filter }) => {
+  const filterInputId = nanoid();
+
   return (
     <div className={css.filterBox}>
       <label htmlFor={filterInputId} className={css.label}>
@@ -23,7 +26,6 @@ const Filter = ({ filterInputId, handleChange, filter }) => {
 };
 
 Filter.propTypes = {
-  filterInputId: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired,
 };

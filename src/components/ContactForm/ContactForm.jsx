@@ -13,6 +13,10 @@ class ContactForm extends Component {
     ...INITIAL_STATE,
   };
 
+  static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+  };
+
   nameInputId = nanoid();
   numberInputId = nanoid();
 
@@ -23,7 +27,8 @@ class ContactForm extends Component {
     this.reset();
   };
 
-  handleChange = ({ target: { name, value } }) => this.setState({ [name]: value });
+  handleChange = ({ target: { name, value } }) =>
+    this.setState({ [name]: value });
 
   reset = () => {
     this.setState({ ...INITIAL_STATE });
