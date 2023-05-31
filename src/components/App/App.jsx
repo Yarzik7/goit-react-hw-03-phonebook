@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
+import { Component } from 'react';
+import ContactForm from '../ContactForm';
+import ContactList from '../ContactList';
+import Filter from '../Filter';
 import { nanoid } from 'nanoid';
 import { showNotifyReport } from 'js/notifyFunc';
 import css from './App.module.css';
